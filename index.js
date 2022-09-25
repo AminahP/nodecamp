@@ -1,3 +1,5 @@
+/////////                  /////////
+            //FOR FILES
 
 ////// ------ synchronous/ blocking code ------///////
 // not used b/c it takes to long. would have to wait for function to run before you can run 
@@ -5,6 +7,7 @@
 
 const fs = require('fs');
 const http = require('http');
+const url = require('url');
 
 // const textIn = fs.readFileSync('./txt/input.txt', 'utf-8');
 // console.log(textIn);
@@ -36,6 +39,32 @@ const http = require('http');
        // avaoid callback hell using async await
 
 
+/////////                  /////////
+            //FOR SERVER
+
+ const server = http.createServer((req, res) => {
+    // console.log(req.url);
+
+const pathName = req.url;
+if (pathName === '/'|| pathName === '/overview'){
+    res.end('This is the OVERVIEW')
+} else if (pathName === '/product'){
+    res.end('This is the PRODUCT')
+} else {
+    res.writeHead(404,{
+        'Content-type': 'text/html' //
+    })
+    res.end('<h1>PAGE NOT FOUND!</h1>');
+}
+
+    // res.end('HELLO FROM THE SERVER!');
+ });
+
+server.listen(8000 , ()=>{
+    console.log('Chillen on port 8000')
+});
 
 
 
+
+ 
